@@ -93,6 +93,9 @@ function createCharList() {
     newCharList = newCharList.concat(symbolList)
     symbolBool = true
   }
+  if (!upperCaseBool && !lowerCaseBool && !numberBool && !symbolBool) {
+    alert("No password generated becasue you did not select any criteria.\nPlease try again.")
+  }
 }
 // finds length of newCharList array
 function findListLength() {
@@ -156,12 +159,7 @@ function generatePassword() {
   while (!ucCritBool || !lcCritBool || !numCritBool || !symCritBool) {
     boolVarReset()
     createPasswordArray()
-    console.log(passwordArray)
     criteriaCheck()
-    console.log(symCritBool)
-    console.log(numCritBool)
-    console.log(lcCritBool)
-    console.log(ucCritBool)
   }
   return passwordArray.join("")
 }
