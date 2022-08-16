@@ -17,47 +17,35 @@ var newCharList = []
 var listLength = 0
 // array to hold final password before it is passed to a string
 var passwordArray = []
-
-function checkType() {
-  if (isNaN(passwordLength)) {
-    alert("Please enter a valid input")
-    return passwordLength = 0
-  }
-}
 // ask user to input desired password length between 8 and 128
 // while loop will run until user makes a valid input
 function lengthInput() {
   while (passwordLength < 8 || passwordLength > 128) {
     passwordLength = prompt("Please enter how many characters you would like you password." + "\n" +
     "Enter a number that is at least 8 and no more than 128")
-    // checkType()
     if (isNaN(passwordLength)) {
       alert("Please enter a valid input")
       passwordLength = 0
     }
   }
 }
-
+// ask user if they would like to use uppercase letters
 function inputUpperCase() {
   return confirm("Would you like to use upper case letters?")
 }
-
+// ask user if they would like to use lowercase letters
 function inputLowerCase() {
   return confirm("Would you like to use lower case letters?")
 }
-
+// ask user if they would like to use numbers
 function inputnumber() {
   return confirm("Would you like to use numbers?")
 }
-
+// ask user if they would like to use symbols
 function inputsymbol() {
   return confirm("Would you like to use symbols?")
 }
-
-function getRandom() {
-  return Math.floor(Math.random() * listLength)
-}
-
+// creates newCharlist based on user input criteria
 function createCharList() {
   if (inputUpperCase()) {
     newCharList = newCharList.concat(upperCaseList)
@@ -72,26 +60,28 @@ function createCharList() {
     newCharList = newCharList.concat(symbolList)
   }
 }
-
+// finds length of newCharList array
 function findListLength() {
   listLength = newCharList.length
 }
-
-function createPassword() {
+// generates random number based of the length of newCharList
+function getRandom() {
+  return Math.floor(Math.random() * listLength)
+}
+// creates password as an array of characters
+function createPasswordArray() {
   for (var i = 0; i < passwordLength; i++) {
     passwordArray.push(newCharList[getRandom()])
   }
 }
-// password.shift()
+// runs all functions to generate passwordArray and passes passwordArray as a string
 function generatePassword() {
   passwordLength = 0
   passwordArray = []
   lengthInput()
-  console.log(passwordLength)
-  console.log(Number(passwordLength))
   createCharList()
   findListLength()
-  createPassword()
+  createPasswordArray()
   return passwordArray.join("")
 }
 
