@@ -17,6 +17,15 @@ var newCharList = []
 var listLength = 0
 // array to hold final password before it is passed to a string
 var passwordArray = []
+
+var upperCaseBool = false
+var lowerCaseBool = false
+var numberBool = false
+var symbolBool = false
+var ucCritBool = false
+var lcCritBool = false
+var numCritBool = false
+var symCritBool = false
 // ask user to input desired password length between 8 and 128
 // while loop will run until user makes a valid input
 function lengthInput() {
@@ -49,15 +58,19 @@ function inputsymbol() {
 function createCharList() {
   if (inputUpperCase()) {
     newCharList = newCharList.concat(upperCaseList)
+    upperCaseBool = true
   }
   if (inputLowerCase()) {
     newCharList = newCharList.concat(lowerCaseList)
+    lowerCaseBool = true
   }
   if (inputnumber()) {
     newCharList = newCharList.concat(numberList)
+    numberBool = true
   }
   if (inputsymbol()) {
     newCharList = newCharList.concat(symbolList)
+    symbolBool = true
   }
 }
 // finds length of newCharList array
@@ -74,14 +87,76 @@ function createPasswordArray() {
     passwordArray.push(newCharList[getRandom()])
   }
 }
+
+function criteriaCheck() {
+  if (upperCaseBool == true) {
+    for (i = 0; i < upperCaseList.length; i++) {
+      if (passwordArray.includes(upperCaseList[i])) {
+        ucCritBool = true
+      }
+    }
+  }else {
+    ucCritBool = true
+  }
+  if (lowerCaseBool == true) {
+    for (i = 0; i < lowerCaseList.length; i++) {
+      if (passwordArray.includes(lowerCaseList[i])) {
+        lcCritBool = true
+      }
+    }
+  }else {
+    lcCritBool = true
+  }
+  if (numberBool == true) {
+    for (i = 0; i < numberList.length; i++) {
+      if (passwordArray.includes(numberList[i])) {
+        numCritBool = true
+      }
+    }
+  }else {
+    numCritBool = true
+  }
+  if (symbolBool == true) {
+    for (i = 0; i < symbolList.length; i++) {
+      if (passwordArray.includes(symbolList[i])) {
+        symCritBool = true
+      }
+    }
+  }else {
+    symCritBool = true
+  }
+}
+// criteriaCheck()
+// console.log(criteriaCheckBool)
 // runs all functions to generate passwordArray and passes passwordArray as a string
 function generatePassword() {
+  ucCritBool = false
+  lcCritBool = false
+  numCritBool = false
+  symCritBool = false
   passwordLength = 0
-  passwordArray = []
+  newCharList = []
+  upperCaseBool = false
+  lowerCaseBool = false
+  numberBool = false
+  symbolBool = false
   lengthInput()
   createCharList()
   findListLength()
-  createPasswordArray()
+  while (!ucCritBool || !lcCritBool || !numCritBool || !symCritBool) {
+    passwordArray = []
+    ucCritBool = false
+    lcCritBool = false
+    numCritBool = false
+    symCritBool = false
+    createPasswordArray()
+    console.log(passwordArray)
+    criteriaCheck()
+    console.log(symCritBool)
+    console.log(numCritBool)
+    console.log(lcCritBool)
+    console.log(ucCritBool)
+  }
   return passwordArray.join("")
 }
 
