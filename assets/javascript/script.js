@@ -1,19 +1,40 @@
 // Assignment code here
+// created array to hold all uppercase letters
 var upperCaseList = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S",
 "T","U","V","W","X","Y","Z"]
+// created array to hold all lowercase letters
 var lowerCaseList = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q",
 "r","s","t","u","v","w","x","y","z"]
+// created array to hold all numbers
 var numberList = [0,1,2,3,4,5,6,7,8,9]
+// created array to hold all symbols
 var symbolList = ["!","#","$","%","&","*","+",'-',"/","?","@","=","_"]
+// variable to hold password length
 var passwordLength = 0
+// array to hold list of possible characters chosen by user input
 var newCharList = []
+// variable to record length of newCharList
 var listLength = 0
-var passwordString = []
+// array to hold final password before it is passed to a string
+var passwordArray = []
 
+function checkType() {
+  if (isNaN(passwordLength)) {
+    alert("Please enter a valid input")
+    return passwordLength = 0
+  }
+}
+// ask user to input desired password length between 8 and 128
+// while loop will run until user makes a valid input
 function lengthInput() {
   while (passwordLength < 8 || passwordLength > 128) {
     passwordLength = prompt("Please enter how many characters you would like you password." + "\n" +
     "Enter a number that is at least 8 and no more than 128")
+    // checkType()
+    if (isNaN(passwordLength)) {
+      alert("Please enter a valid input")
+      passwordLength = 0
+    }
   }
 }
 
@@ -58,18 +79,20 @@ function findListLength() {
 
 function createPassword() {
   for (var i = 0; i < passwordLength; i++) {
-    passwordString.push(newCharList[getRandom()])
+    passwordArray.push(newCharList[getRandom()])
   }
 }
 // password.shift()
 function generatePassword() {
   passwordLength = 0
-  passwordString = []
+  passwordArray = []
   lengthInput()
+  console.log(passwordLength)
+  console.log(Number(passwordLength))
   createCharList()
   findListLength()
   createPassword()
-  return passwordString.join("")
+  return passwordArray.join("")
 }
 
 // Get references to the #generate element
