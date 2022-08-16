@@ -17,7 +17,7 @@ var newCharList = []
 var listLength = 0
 // array to hold final password before it is passed to a string
 var passwordArray = []
-
+// create boolean variable to store criteria infomation
 var upperCaseBool = false
 var lowerCaseBool = false
 var numberBool = false
@@ -26,6 +26,27 @@ var ucCritBool = false
 var lcCritBool = false
 var numCritBool = false
 var symCritBool = false
+// resets all variable to initial state
+function allVarReset() {
+  ucCritBool = false
+  lcCritBool = false
+  numCritBool = false
+  symCritBool = false
+  passwordLength = 0
+  newCharList = []
+  upperCaseBool = false
+  lowerCaseBool = false
+  numberBool = false
+  symbolBool = false
+}
+// resets criteria boolean variable and passwordArray to initial state
+function boolVarReset() {
+  passwordArray = []
+  ucCritBool = false
+  lcCritBool = false
+  numCritBool = false
+  symCritBool = false
+}
 // ask user to input desired password length between 8 and 128
 // while loop will run until user makes a valid input
 function lengthInput() {
@@ -87,7 +108,7 @@ function createPasswordArray() {
     passwordArray.push(newCharList[getRandom()])
   }
 }
-
+// function checks to ensure that passworkArray meets all the criteria specified by user
 function criteriaCheck() {
   if (upperCaseBool == true) {
     for (i = 0; i < upperCaseList.length; i++) {
@@ -126,29 +147,14 @@ function criteriaCheck() {
     symCritBool = true
   }
 }
-// criteriaCheck()
-// console.log(criteriaCheckBool)
 // runs all functions to generate passwordArray and passes passwordArray as a string
 function generatePassword() {
-  ucCritBool = false
-  lcCritBool = false
-  numCritBool = false
-  symCritBool = false
-  passwordLength = 0
-  newCharList = []
-  upperCaseBool = false
-  lowerCaseBool = false
-  numberBool = false
-  symbolBool = false
+  allVarReset()
   lengthInput()
   createCharList()
   findListLength()
   while (!ucCritBool || !lcCritBool || !numCritBool || !symCritBool) {
-    passwordArray = []
-    ucCritBool = false
-    lcCritBool = false
-    numCritBool = false
-    symCritBool = false
+    boolVarReset()
     createPasswordArray()
     console.log(passwordArray)
     criteriaCheck()
